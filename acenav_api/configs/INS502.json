@@ -3,58 +3,416 @@
     "type": "INS502",
     "description": "INS502 Configurartion file",
     "defaults": {
-        "format": "AceinnaBinaryV3",                                                                      
+        "format": "AceinnaBinaryV3",
         "payloadEndian": "lsb"
     },
     "scaling": {
-		"position": "1e-7",
-		"hundred": "1/100",
-		"thousand": "1/1000",
+        "position": "1e-7",
+        "hundred": "1/100",
+        "thousand": "1/1000",
         "rate": "1e-10"
-	},
-    "formats": ["AceinnaBinaryV3"],
+    },
+    "userConfiguration": [
+        {
+            "paramId": 1,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_PRI_LEVER_ARM_BX",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 2,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_PRI_LEVER_ARM_BY",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 3,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_PRI_LEVER_ARM_BZ",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 4,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_VRP_LEVER_ARM_BX",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 5,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_VRP_LEVER_ARM_BY",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 6,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_VRP_LEVER_ARM_BZ",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 7,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_USER_LEVER_ARM_BX",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 8,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_USER_LEVER_ARM_BY",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 9,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_USER_LEVER_ARM_BZ",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 10,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_ROTATION_RBVX",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 11,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_ROTATION_RBVY",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 12,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_ROTATION_RBVZ",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 13,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_GNSS2_LEVER_ARM_BX",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 14,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_GNSS2_LEVER_ARM_BY",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 15,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_GNSS2_LEVER_ARM_BZ",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 16,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_ROTATION_ALIGN_BX",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 17,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_ROTATION_ALIGN_BY",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 18,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_ROTATION_ALIGN_BZ",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 19,
+            "category": "INS",
+            "paramType": "input",
+            "type": "uint8",
+            "name": "USER_NHC_ENABLE"
+        },
+        {
+            "paramId": 20,
+            "category": "INS",
+            "paramType": "input",
+            "type": "uint8",
+            "name": "USER_ODOMETER_ENABLE"
+        },
+        {
+            "paramId": 21,
+            "category": "INS",
+            "paramType": "input",
+            "type": "int16",
+            "name": "USER_COMBINE_NHC_AND_ODO"
+        },
+        {
+            "paramId": 22,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "int16",
+            "name": "USER_GNSS_HEADING_UPDATE_ENABLE"
+        },
+        {
+            "paramId": 23,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_DUAL_ANT_LENGTH",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 24,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_HEADING_COMPENSATION",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 25,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_HEADING_BORESIGHT",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 26,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_RELATIVE_LENGTH_TOL",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 27,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "int16",
+            "name": "USER_COG_UPDATE_ENABLE",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 28,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_HEADINGCOG_SPEED_TOL",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 29,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "uint8",
+            "name": "USER_DO_ZUPT",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 30,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "double",
+            "name": "USER_ZUPT_INTERVAL",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 31,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "uint8",
+            "name": "USER_USE_ODOMETER_FOR_ZUPT",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 32,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_ODO_SPEED_TOL",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 33,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "uint8",
+            "name": "USER_CHECK_ZUPT_WITH_ODOMETRY",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 34,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_MAX_ODO_ZUPT_SPEED",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 35,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_SLIPANG_F_PARAM_0",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 36,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_SLIPANG_F_PARAM_1",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 37,
+            "category": "GNSS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_SLIPANG_F_PARAM_2",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 38,
+            "category": "INS",
+            "paramType": "input",
+            "type": "int32",
+            "name": "USER_SLIPANG_F_NUM",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 39,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_SLIPANG_MINSPEED",
+            "value_accuracy": 4
+        },
+        {
+            "paramId": 40,
+            "category": "INS",
+            "paramType": "input",
+            "type": "float",
+            "name": "USER_SLIPANG_MINRATE",
+            "value_accuracy": 4
+        }
+    ],
+    "formats": [
+        "AceinnaBinaryV3"
+    ],
     "userMessages": {
-        "inputPackets": [],
+        "inputPackets": [
+            "iR",
+            "cA",
+            "iO",
+            "gM",
+            "wS",
+            "gE",
+            "hV",
+            "sV",
+            "aV",
+            "gB",
+            "uB",
+            "sC",
+            "rD",
+            "rG",
+            "sR",
+            "lO",
+            "sO",
+            "cO",
+            {
+                "name": "wA_start",
+                "packet": "0x4177"
+            },
+            {
+                "name": "wA_data",
+                "packet": "0x4177"
+            },
+            "oT"
+        ],
         "outputPackets": [
             {
                 "name": "S2",
                 "display": "IMU",
-                "packet": "0x0a01"
+                "packet": "0x3253"
             },
             {
                 "name": "GN",
                 "display": "GNSS Solution Packet",
-                "packet": "0x0a02"
+                "packet": "0x4e47"
             },
             {
                 "name": "IN",
                 "display": "INS Solution Packet",
-                "packet": "0x0a03"
+                "packet": "0x6449"
             },
             {
                 "name": "ODO",
                 "display": "Odometer",
-                "packet": "0x0a04"
+                "packet": "0x314f"
             },
             {
                 "name": "DIAGNOSTIC",
                 "display": "Diagnostic Message",
-                "packet": "0x0a05"
+                "packet": "0x4d44"
             },
             {
                 "name": "HS",
                 "display": "Heading Solution",
-                "packet": "0x0a0b"
+                "packet": "0x5348"
             },
             {
                 "name": "IR",
                 "display": "INS Record",
-                "packet": "0x0aa3"
+                "packet": "0x5249"
+            },
+            {
+                "name": "GI",
+                "display": "GNSS Integrity",
+                "packet": "0x4947"
             },
             {
                 "name": "II",
                 "display": "INS Integrity",
                 "packet": "0x4949"
+            },
+            {
+                "name": "SV",
+                "display": "Satellites Signal Strength",
+                "packet": "0x5653"
             }
         ]
     },
@@ -189,21 +547,21 @@
                 "name": "hdop",
                 "unit": "",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "float",
                 "name": "vdop",
                 "unit": "",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "float",
                 "name": "tdop",
                 "unit": "",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "uint16",
@@ -216,63 +574,63 @@
                 "name": "north_vel",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "int16",
                 "name": "east_vel",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "int16",
                 "name": "up_vel",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "uint16",
                 "name": "latitude_std",
                 "unit": "deg",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "longitude_std",
                 "unit": "deg",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "height_std",
                 "unit": "m",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "north_vel_std",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "east_vel_std",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "up_vel_std",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint8",
@@ -287,7 +645,7 @@
                 "format": ""
             }
         ],
-        "IN":[
+        "IN": [
             {
                 "type": "uint16",
                 "name": "gps_week",
@@ -357,112 +715,112 @@
                 "name": "roll",
                 "unit": "deg",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "uint16",
                 "name": "pitch",
                 "unit": "deg",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "uint16",
                 "name": "heading",
                 "unit": "deg",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "int16",
                 "name": "longitudinal_velocity",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "int16",
                 "name": "lateral_velocity",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "uint16",
                 "name": "latitude_std",
                 "unit": "m",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "longitude_std",
                 "unit": "m",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "height_std",
                 "unit": "m",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "north_velocity_std",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "east_velocity_std",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "up_velocity_std",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "long_vel_std",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "lat_vel_std",
                 "unit": "m/s",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "roll_std",
                 "unit": "deg",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
                 "name": "pitch_std",
                 "unit": "deg",
                 "format": "",
-                "scaling":"hundred"
+                "scaling": "hundred"
             },
             {
                 "type": "uint16",
                 "name": "heading_std",
                 "unit": "deg",
                 "format": "",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint8",
@@ -471,7 +829,7 @@
                 "format": ""
             }
         ],
-        "ODO":[
+        "ODO": [
             {
                 "type": "uint16",
                 "name": "gps_week",
@@ -509,7 +867,7 @@
                 "format": "16"
             }
         ],
-        "GI":[
+        "GI": [
             {
                 "type": "uint16",
                 "name": "gps_week",
@@ -646,7 +1004,7 @@
                 "unit": ""
             }
         ],
-        "II":[
+        "II": [
             {
                 "type": "uint16",
                 "name": "gps_week",
@@ -705,7 +1063,7 @@
                 "unit": ""
             }
         ],
-        "DIAGNOSTIC":[
+        "DIAGNOSTIC": [
             {
                 "type": "uint16",
                 "name": "gps_week",
@@ -761,7 +1119,7 @@
                 "format": ""
             }
         ],
-        "HS":[
+        "HS": [
             {
                 "type": "uint16",
                 "name": "gps_week",
@@ -780,7 +1138,7 @@
                 "type": "uint16",
                 "name": "length",
                 "unit": "m",
-                "scaling":"thousand"
+                "scaling": "thousand"
             },
             {
                 "type": "uint16",
@@ -824,7 +1182,7 @@
                 "scaling": "hundred"
             }
         ],
-        "SV":[
+        "SV": [
             {
                 "type": "uint16",
                 "name": "gps_week",
@@ -873,6 +1231,281 @@
                 "unit": "deg",
                 "format": ""
             }
-        ]
+        ],
+        "iR_REQ": [
+            {
+                "name": "rtcm",
+                "type": "uint8_array"
+            }
+        ],
+        "//iR_RESP": [],
+        "cA_REQ": [
+            {
+                "name": "speed",
+                "type": "float"
+            }
+        ],
+        "//cA_RESP": [],
+        "iO_REQ": [
+            {
+                "name": "can_version",
+                "type": "uint8"
+            },
+            {
+                "name": "message_id",
+                "type": "uint32"
+            },
+            {
+                "name": "frame_data",
+                "type": "uint8_array"
+            }
+        ],
+        "//iO_RESP": [],
+        "gM_RESP": [
+            {
+                "name": "mcu_id",
+                "type": "uint8_array"
+            }
+        ],
+        "wS_REQ": [
+            {
+                "name": "content_type",
+                "type": "uint8"
+            },
+            {
+                "name": "serial_number",
+                "type": "uint32"
+            }
+        ],
+        "ws_RESP": [
+            {
+                "name": "result",
+                "type": "int8"
+            }
+        ],
+        "gE_REQ": [
+            {
+                "name": "error_type",
+                "type": "uint8"
+            },
+            {
+                "name": "error_category",
+                "type": "uint8"
+            }
+        ],
+        "gE_RESP": [
+            {
+                "name": "error_codes",
+                "type": "uint8_array"
+            }
+        ],
+        "hV_REQ": [
+            {
+                "name": "component",
+                "type": "uint8"
+            }
+        ],
+        "hV_RESP": [
+            {
+                "name": "component",
+                "type": "uint8"
+            },
+            {
+                "name": "version",
+                "type": "string"
+            }
+        ],
+        "sV_REQ": [
+            {
+                "name": "component",
+                "type": "uint8"
+            }
+        ],
+        "sV_RESP": [
+            {
+                "name": "component",
+                "type": "uint8"
+            },
+            {
+                "name": "version",
+                "type": "string"
+            }
+        ],
+        "aV_RESP": [
+            {
+                "name": "version",
+                "type": "string"
+            }
+        ],
+        "gB_REQ": [
+            {
+                "name": "param_nums",
+                "type": "uint8"
+            },
+            {
+                "name": "param_ids",
+                "type": "uint8_array"
+            }
+        ],
+        "gB_RESP": [
+            {
+                "name": "param_nums",
+                "type": "uint8"
+            },
+            {
+                "name": "parameters",
+                "type": "parameter_array"
+            }
+        ],
+        "uB_REQ": [
+            {
+                "name": "param_count",
+                "type": "uint8"
+            },
+            {
+                "name": "parameters",
+                "type": "parameter_array"
+            }
+        ],
+        "uB_RESP": [
+            {
+                "name": "param_count",
+                "type": "uint8"
+            },
+            {
+                "name": "parameters",
+                "type": "update_result_array"
+            }
+        ],
+        "rG_REQ": [
+            {
+                "name": "control_mode",
+                "type": "uint8"
+            },
+            {
+                "name": "reserve",
+                "type": "uint8"
+            },
+            {
+                "name": "time_of_interrupt",
+                "type": "uint16"
+            }
+        ],
+        "rG_RESP": [
+            {
+                "name": "gps_millisecs",
+                "type": "uint32"
+            }
+        ],
+        "lO_REQ": [
+            {
+                "name": "interface_type",
+                "type": "uint8"
+            }
+        ],
+        "lO_RESP": [
+            {
+                "name": "outputs",
+                "type": "output_array"
+            }
+        ],
+        "sO_REQ": [
+            {
+                "name": "outputs",
+                "type": "output_update_array"
+            }
+        ],
+        "sO_RESP": [
+            {
+                "name": "result",
+                "type": "int8"
+            }
+        ],
+        "cO_REQ": [
+            {
+                "name": "interface_type",
+                "type": "uint8"
+            }
+        ],
+        "cO_RESP": [
+            {
+                "name": "result",
+                "type": "int8"
+            }
+        ],
+        "wA_start_REQ": [
+            {
+                "name": "packet_type",
+                "type": "uint8"
+            },
+            {
+                "name": "total_packet",
+                "type": "uint8"
+            },
+            {
+                "name": "total_size",
+                "type": "uint16"
+            }
+        ],
+        "wA_start_RESP": [
+            {
+                "name": "packet_type",
+                "type": "uint8"
+            },
+            {
+                "name": "error_code",
+                "type": "uint16"
+            }
+        ],
+        "wA_data_REQ": [
+            {
+                "name": "packet_type",
+                "type": "uint8"
+            },
+            {
+                "name": "packet_index",
+                "type": "uint8"
+            },
+            {
+                "name": "algorithm_payload",
+                "type": "uint8_array"
+            }
+        ],
+        "wA_data_RESP": [
+            {
+                "name": "packet_type",
+                "type": "uint8"
+            },
+            {
+                "name": "packet_index",
+                "type": "uint8"
+            },
+            {
+                "name": "error_code",
+                "type": "uint16"
+            }
+        ],
+        "oT_REQ": [
+            {
+                "name": "operation",
+                "type": "uint8"
+            }
+        ],
+        "oT_RESP": [
+            {
+                "name": "operation",
+                "type": "uint8"
+            },
+            {
+                "name": "result",
+                "type": "uint16"
+            }
+        ],
+        "//sC_REQ": [],
+        "//sC_RESP": [],
+        "//rD_REQ": [],
+        "//rD_RESP": [],
+        "//sR_REQ": [],
+        "//sR_RESP": []
     }
 }
