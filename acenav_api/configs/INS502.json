@@ -365,6 +365,11 @@
         ],
         "outputPackets": [
             {
+                "name": "IN",
+                "display": "INS Solution Packet",
+                "packet": "0x6449"
+            },
+            {
                 "name": "S2",
                 "display": "IMU",
                 "packet": "0x3253"
@@ -375,14 +380,21 @@
                 "packet": "0x4e47"
             },
             {
-                "name": "IN",
-                "display": "INS Solution Packet",
-                "packet": "0x6449"
+                "name": "RR",
+                "display": "Raw GNSS Data Log"
             },
             {
                 "name": "ODO",
                 "display": "Odometer",
                 "packet": "0x314f"
+            },
+            {
+                "name": "T1",
+                "display": "RTK Algorithm Trace Data"
+            },
+            {
+                "name": "T2",
+                "display": "INS Algorithm Trace Data"
             },
             {
                 "name": "DIAGNOSTIC",
@@ -865,6 +877,46 @@
                 "name": "wheel_tick",
                 "unit": "",
                 "format": "16"
+            }
+        ],
+        "RR":[
+            {
+                "name":"piece_data",
+                "type":"uint8_array"
+            }
+        ],
+        "T1":[
+            {
+                "name":"sequence",
+                "type":"uint16"
+            },
+            {
+                "name":"total",
+                "type":"uint16"
+            },
+            {
+                "name":"trace_buf",
+                "type":"uint8_array"
+            }
+        ],
+        "T2":[
+            {
+                "name":"sequence",
+                "type":"uint16"
+            },
+            {
+                "name":"total",
+                "type":"uint16"
+            },
+            {
+                "name":"trace_buf",
+                "type":"uint8_array"
+            }
+        ],
+        "IR":[
+            {
+                "name":"algorithm_buf",
+                "type":"uint8_array"
             }
         ],
         "GI": [

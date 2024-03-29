@@ -7,49 +7,17 @@ command_builder = create_command_builder('INS502')
 # Generate data parser
 parser = create_parser('INS502')
 
+#region Command Demo
+
 def command_demo():
-    cmd, request, response = iR()
-    print_command(cmd, request, response)
-    cmd, request, response = cA()
-    print_command(cmd, request, response)
-    cmd, request, response = iO()
-    print_command(cmd, request, response)
-    cmd, request, response = gM()
-    print_command(cmd, request, response)
-    cmd, request, response = wS()
-    print_command(cmd, request, response)
-    cmd, request, response = gE()
-    print_command(cmd, request, response)
-    cmd, request, response = hV()
-    print_command(cmd, request, response)
-    cmd, request, response = sV()
-    print_command(cmd, request, response)
-    cmd, request, response = aV()
-    print_command(cmd, request, response)
-    cmd, request, response = gB()
-    print_command(cmd, request, response)
-    cmd, request, response = uB()
-    print_command(cmd, request, response)
-    cmd, request, response = sC()
-    print_command(cmd, request, response)
-    cmd, request, response = rD()
-    print_command(cmd, request, response)
-    cmd, request, response = rG()
-    print_command(cmd, request, response)
-    cmd, request, response = sR()
-    print_command(cmd, request, response)
-    cmd, request, response = lO()
-    print_command(cmd, request, response)
-    cmd, request, response = sO()
-    print_command(cmd, request, response)
-    cmd, request, response = cO()
-    print_command(cmd, request, response)
-    cmd, request, response = wA_start()
-    print_command(cmd, request, response)
-    cmd, request, response = wA_data()
-    print_command(cmd, request, response)
-    cmd, request, response = oT()
-    print_command(cmd, request, response)
+    print('Command Demo:')
+    print('--------------------------\r\n')
+    command_list = ['iR','cA','iO','gM','wS','gE',
+                    'hV','sV','aV','gB','uB','sC',
+                    'rD','rG','sR','lO','sO','cO',
+                    'wA_start','wA_data','oT']
+    for command in command_list:
+        print_output(eval(f'{command}()'))
 
 def iR():
     cmd = 'iR'
@@ -188,18 +156,55 @@ def oT():
     command_response = parser.decode(cmd, bytes([0x01, 0x00, 0x00]))
     return cmd, command_bytes, command_response
 
+def print_command(args):
+    if args == None or len(args) != 3:
+        return
+    cmd = args[0]
+    request = args[1]
+    response = args[2]
+    print('Command:',cmd)
+    print('\r')
+    print('Request:', request) #['{:X}'.format(x) for x in request])
+    #print('\r')
+    print('Response:', response)
+    print('\r\n--------------------------\r\n')
+
+#endregion Command Demo
+
+#region Data Parser Demo
 
 def data_parser_demo():
-    parser = create_parser('INS502')
-    decode_result = parser.decode('S2', b'\x08\xbf\x00\x06\xf8\xba<#\xd7\n<#\xd7\n<#\xd7\n?\x80\x00\x00@\x00\x00\x00@@\x00\x00B\x0c\x00\x00\x00\x00\x00\x00')
-    print('S2 decoded as:', decode_result)
-    encode_result = parser.encode('S2', [2239,456890,0.01,0.01,0.01,1,2,3,35,0,0])
-    print('S2 encoded as:', encode_result)
+    print('Data Parser Demo:')
+    print('--------------------------\r\n')
+    output_packet_types = ['IN','S2','GN','RR','ODO',
+                           'T1','T2','GI','II','IR',
+                           'MB','HS','DIAGNOSTIC','RT','SV']
+    for packet_type in output_packet_types:
+        print_output(build_output_demo(packet_type))
+    
+def build_output_demo(packet_type:str):
+    random_data = parser.build_random_data(packet_type)
+    if random_data is None:
+        return None
 
-def print_command(cmd, request, response):
-    print(cmd, 'Request:', ['{:X}'.format(x) for x in request])
-    print(cmd, 'Response:', response)
+    encode_result = parser.encode(packet_type, random_data)    
+    decode_result = parser.decode(packet_type, encode_result)
+    return packet_type, encode_result, decode_result
+
+def print_output(args):
+    if args == None or len(args) != 3:
+        return
+    packet_type = args[0]
+    encode_result = args[1]
+    decode_result = args[2]
+    print('Packet Type:',packet_type)
     print('\r')
+    print('Encoded:', encode_result)
+    print('\r')
+    print('Decoded:', decode_result) #['{:X}'.format(x) for x in encode_result])
+    print('\r\n--------------------------\r\n')
+
+#endregion Data Parser Demo
 
 if __name__ == '__main__':
     command_demo()

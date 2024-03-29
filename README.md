@@ -25,20 +25,19 @@ A examle to use the library to communicate with the device. It includes command 
 ```python
 # Generate Command Builder
 command_builder = create_command_builder('INS502')
-# Generate Command
-command = command_builder.create('uB', [
+# Generate Command Request Bytes
+command_bytes = command_builder.create('uB', [
     {'paramId':1, 'value':1},
     {'paramId':2, 'value':2},
 ])
-command_bytes = command.to_bytes()
 
-# Prepare serial_port 或者 ethernet_port，发送 Command
+# Prepare serial_port or ethernet_port as communicator, then send request bytes
 communicator.write(command_bytes)
-# Read Response
+# Read Response Bytes
 read_bytes = communicator.read()
 packet_bytes = fetch_last_packet(read_bytes, 'uB')
 
-# Generate Parser
+# Generate Data Parser
 parser = create_parser('INS502')
 # Decode Response as a dict
 update_result = parser.decode('uB', packet_bytes)
