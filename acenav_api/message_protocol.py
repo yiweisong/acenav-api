@@ -14,13 +14,15 @@ class ParameterConf:
     __param_id = 0
     __type = ''
     __endian = ''
+    __precision = 0
     __address_range = '' #prepare for IMU330RA
     
-    def __init__(self, name, type, param_id, endian) -> None:
+    def __init__(self, name, type, param_id, endian, precision) -> None:
         self.__name = name
         self.__type = type
         self.__param_id = int(param_id)
         self.__endian = endian
+        self.__precision = precision
         
     @property
     def name(self)->str:
@@ -37,6 +39,10 @@ class ParameterConf:
     @property
     def endian(self)->str:
         return self.__endian
+    
+    @property
+    def precision(self)->int:
+        return self.__precision
 
 class CommandFieldConf:
     __type = ''
@@ -98,13 +104,15 @@ class OutputFieldConf:
     __endian = ''
     __unit = ''
     __scaling = ''
+    __precision = 0
 
-    def __init__(self, name, field_type, endian,unit,scaling) -> None:
+    def __init__(self, name, field_type, endian,unit,scaling,precision) -> None:
         self.__name = name
         self.__type = field_type
         self.__endian = endian
         self.__unit = unit
         self.__scaling = scaling
+        self.__precision = precision
     
     @property
     def type(self)->str:
@@ -125,6 +133,10 @@ class OutputFieldConf:
     @property
     def scaling(self)->str:
         return self.__scaling
+    
+    @property
+    def precision(self)->int:
+        return self.__precision
     
 class OutputConf:
     __name = ''
@@ -171,7 +183,8 @@ class MessageProtocol:
                     fetch_value(item,'name'),
                     fetch_value(item,'type'),
                     fetch_value(item,'paramId'),
-                    fetch_value(item,'endian',default_endian)
+                    fetch_value(item,'endian',default_endian),
+                    fetch_value(item,'precision',4)
                 )
             )
 
@@ -194,7 +207,8 @@ class MessageProtocol:
                         fetch_value(field,'type'),
                         fetch_value(field,'endian', default_endian),
                         fetch_value(field,'unit'),
-                        fetch_value(field,'scaling')
+                        fetch_value(field,'scaling'),
+                        fetch_value(field,'precision',6)
                     )
                 )
             self.__outputs.append(

@@ -19,7 +19,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_PRI_LEVER_ARM_BX",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 2,
@@ -27,7 +27,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_PRI_LEVER_ARM_BY",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 3,
@@ -35,7 +35,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_PRI_LEVER_ARM_BZ",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 4,
@@ -43,7 +43,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_VRP_LEVER_ARM_BX",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 5,
@@ -51,7 +51,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_VRP_LEVER_ARM_BY",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 6,
@@ -59,7 +59,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_VRP_LEVER_ARM_BZ",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 7,
@@ -67,7 +67,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_USER_LEVER_ARM_BX",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 8,
@@ -75,7 +75,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_USER_LEVER_ARM_BY",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 9,
@@ -83,7 +83,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_USER_LEVER_ARM_BZ",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 10,
@@ -91,7 +91,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_ROTATION_RBVX",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 11,
@@ -99,7 +99,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_ROTATION_RBVY",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 12,
@@ -107,7 +107,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_ROTATION_RBVZ",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 13,
@@ -115,7 +115,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_GNSS2_LEVER_ARM_BX",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 14,
@@ -123,7 +123,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_GNSS2_LEVER_ARM_BY",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 15,
@@ -131,7 +131,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_GNSS2_LEVER_ARM_BZ",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 16,
@@ -139,7 +139,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_ROTATION_ALIGN_BX",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 17,
@@ -147,7 +147,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_ROTATION_ALIGN_BY",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 18,
@@ -155,7 +155,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_ROTATION_ALIGN_BZ",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 19,
@@ -191,7 +191,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_DUAL_ANT_LENGTH",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 24,
@@ -199,7 +199,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_HEADING_COMPENSATION",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 25,
@@ -207,7 +207,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_HEADING_BORESIGHT",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 26,
@@ -215,15 +215,14 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_RELATIVE_LENGTH_TOL",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 27,
             "category": "GNSS",
             "paramType": "input",
             "type": "int16",
-            "name": "USER_COG_UPDATE_ENABLE",
-            "value_accuracy": 4
+            "name": "USER_COG_UPDATE_ENABLE"
         },
         {
             "paramId": 28,
@@ -231,15 +230,14 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_HEADINGCOG_SPEED_TOL",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 29,
             "category": "GNSS",
             "paramType": "input",
             "type": "uint8",
-            "name": "USER_DO_ZUPT",
-            "value_accuracy": 4
+            "name": "USER_DO_ZUPT"
         },
         {
             "paramId": 30,
@@ -247,15 +245,14 @@
             "paramType": "input",
             "type": "double",
             "name": "USER_ZUPT_INTERVAL",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 31,
             "category": "GNSS",
             "paramType": "input",
             "type": "uint8",
-            "name": "USER_USE_ODOMETER_FOR_ZUPT",
-            "value_accuracy": 4
+            "name": "USER_USE_ODOMETER_FOR_ZUPT"
         },
         {
             "paramId": 32,
@@ -263,15 +260,14 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_ODO_SPEED_TOL",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 33,
             "category": "GNSS",
             "paramType": "input",
             "type": "uint8",
-            "name": "USER_CHECK_ZUPT_WITH_ODOMETRY",
-            "value_accuracy": 4
+            "name": "USER_CHECK_ZUPT_WITH_ODOMETRY"
         },
         {
             "paramId": 34,
@@ -279,7 +275,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_MAX_ODO_ZUPT_SPEED",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 35,
@@ -287,7 +283,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_SLIPANG_F_PARAM_0",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 36,
@@ -295,7 +291,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_SLIPANG_F_PARAM_1",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 37,
@@ -303,15 +299,14 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_SLIPANG_F_PARAM_2",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 38,
             "category": "INS",
             "paramType": "input",
             "type": "int32",
-            "name": "USER_SLIPANG_F_NUM",
-            "value_accuracy": 4
+            "name": "USER_SLIPANG_F_NUM"
         },
         {
             "paramId": 39,
@@ -319,7 +314,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_SLIPANG_MINSPEED",
-            "value_accuracy": 4
+            "precision": 4
         },
         {
             "paramId": 40,
@@ -327,7 +322,7 @@
             "paramType": "input",
             "type": "float",
             "name": "USER_SLIPANG_MINRATE",
-            "value_accuracy": 4
+            "precision": 4
         }
     ],
     "formats": [

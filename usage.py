@@ -77,15 +77,15 @@ def gB():
     cmd = 'gB'
     command_bytes = command_builder.create(cmd, 5, [1,2,3,4,5])
 
-    gB_response_bytes = bytes([0x02, 0x01, 0x04, 0x00,0x00,0x00,0x00, 0x02, 0x04, 0x00,0x00,0x00,0x00 ])
+    gB_response_bytes = bytes([0x02, 0x01, 0x04, 0x10,0x06,0x9e,0x3f, 0x02, 0x04, 0xa8,0x35,0x3f,0x40 ])
     command_response = parser.decode(cmd, gB_response_bytes)
     return cmd, command_bytes, command_response
     
 def uB():
     cmd = 'uB'
     command_bytes = command_builder.create(cmd, 2, [
-        {'param_id':1, 'value':1},
-        {'param_id':2, 'value':2},
+        {'param_id':1, 'value':1.45672},
+        {'param_id':2, 'value':2.98761},
     ])
     uB_response_bytes = bytes([0x02, 0x01,0x00,0x03,0x01])
     command_response = parser.decode(cmd, uB_response_bytes)
