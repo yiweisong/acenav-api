@@ -118,18 +118,18 @@ def sR():
 def lO():
     cmd = 'lO'
     command_bytes = command_builder.create(cmd,1)
-    command_response = parser.decode(cmd, bytes([0x53,0x32,0x80,0x47,0x4e,0x01]))
+    command_response = parser.decode(cmd, bytes([0x02,0x53,0x32,0x80,0x47,0x4e,0x01]))
     return cmd, command_bytes, command_response
 
 def sO():
     cmd = 'sO'
-    command_bytes = command_builder.create(cmd,[
+    command_bytes = command_builder.create(cmd,4, [
         {'packet_type':0x3253,'interface_type':0, 'odr':100}, #S2
         {'packet_type':0x4e47,'interface_type':2, 'odr':1}, #GN
         {'packet_type':0x6449,'interface_type':3, 'odr':100}, #IN
         {'packet_type':0x314f,'interface_type':255, 'odr':100}, #O1
     ])
-    command_response = parser.decode(cmd, b'\x00')
+    command_response = parser.decode(cmd, bytes([0x02,0x53,0x32,0x01,0x00,0x47,0x4e,0x01,0x00]))
     return cmd, command_bytes, command_response
 
 def cO():

@@ -1,2 +1,2 @@
 PACKAGE_NAME = 'acenav_api'
-VERSION = '1.0.4'
+VERSION = '1.0.5'
