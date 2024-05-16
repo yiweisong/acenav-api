@@ -141,19 +141,19 @@ def cO():
 def wA_start():
     cmd = 'wA_start'
     command_bytes = command_builder.create(cmd, 0x0a, 30, 30*1024)
-    command_response = parser.decode(cmd, bytes([0x0a,0x00,0x00]))
+    command_response = parser.decode(cmd, bytes([0x0a,0x00]))
     return cmd, command_bytes, command_response
 
 def wA_data():
     cmd = 'wA_data'
     command_bytes = command_builder.create(cmd,0x0b, 0x01, bytes([0x01,0x02,0x03,0x04]))
-    command_response = parser.decode(cmd, bytes([0x0b,0x01,0x00,0x00]))
+    command_response = parser.decode(cmd, bytes([0x0b,0x01,0x00]))
     return cmd, command_bytes, command_response
 
 def oT():
     cmd = 'oT'
     command_bytes = command_builder.create(cmd,1)
-    command_response = parser.decode(cmd, bytes([0x01, 0x00, 0x00]))
+    command_response = parser.decode(cmd, bytes([0x01, 0x00]))
     return cmd, command_bytes, command_response
 
 def print_command(args):

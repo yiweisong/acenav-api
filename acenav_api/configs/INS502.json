@@ -1202,7 +1202,7 @@
         "wS_RESP": [
             {
                 "name": "result",
-                "type": "int8"
+                "type": "uint8"
             }
         ],
         "gE_REQ": [
@@ -1364,7 +1364,7 @@
         "cO_RESP": [
             {
                 "name": "result",
-                "type": "int8"
+                "type": "uint8"
             }
         ],
         "wA_start_REQ": [
@@ -1387,7 +1387,7 @@
                 "name": "packetType"
             },
             {
-                "type": "uint16",
+                "type": "uint8",
                 "name": "errorCode"
             }
         ],
@@ -1415,7 +1415,7 @@
                 "name": "packetIndex"
             },
             {
-                "type": "uint16",
+                "type": "uint8",
                 "name": "errorCode"
             }
         ],
@@ -1432,7 +1432,7 @@
             },
             {
                 "name": "result",
-                "type": "uint16"
+                "type": "uint8"
             }
         ],
         "//sC_REQ": [],
