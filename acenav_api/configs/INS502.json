@@ -1082,6 +1082,7 @@
             },
             {
                 "type": "uint16",
+                "name": "roll",
                 "scaling": "hundred",
                 "unit": "deg"
             },
@@ -1093,6 +1094,7 @@
             },
             {
                 "type": "int16",
+                "name": "heading",
                 "scaling": "hundred",
                 "unit": "deg"
             },
@@ -1105,7 +1107,8 @@
             {
                 "type": "uint16",
                 "name": "length_std",
-                "scaling": "thousand"
+                "scaling": "thousand",
+                "unit": "m"
             },
             {
                 "type": "uint8",
@@ -1183,10 +1186,20 @@
             }
         ],
         "//iO_RESP": [],
+        "gM_REQ": [
+            {
+                "type": "uint8",
+                "name": "content_type"
+            }
+        ],
         "gM_RESP": [
             {
-                "name": "mcu_id",
-                "type": "uint8_array"
+                "type": "uint8",
+                "name": "content_type"
+            },
+            {
+                "type": "uint8_array",
+                "name": "content_value"
             }
         ],
         "wS_REQ": [
@@ -1196,7 +1209,7 @@
             },
             {
                 "type": "uint32",
-                "name": "serial_number"
+                "name": "content_value"
             }
         ],
         "wS_RESP": [
@@ -1301,22 +1314,18 @@
         ],
         "rG_REQ": [
             {
-                "name": "control_mode",
-                "type": "uint8"
-            },
-            {
-                "name": "reserve",
-                "type": "uint8"
-            },
-            {
-                "name": "timeOfInterrupt",
-                "type": "uint16"
+                "type": "uint8",
+                "name": "controlMode"
             }
         ],
         "rG_RESP": [
             {
-                "name": "gps_millisecs",
-                "type": "uint32"
+                "type": "uint8",
+                "name": "controlMode"
+            },
+            {
+                "type": "uint8",
+                "name": "result"
             }
         ],
         "lO_REQ": [
