@@ -12,7 +12,7 @@ parser = create_parser('INS502')
 def command_demo():
     print('Command Demo:')
     print('--------------------------\r\n')
-    command_list = ['iR','cA','iO','gM','wS','gE',
+    command_list = ['iR','cA','iO','gM','wM','gE',
                     'hV','sV','aV','gB','uB','sC',
                     'rD','rG','sR','lO','sO','cO',
                     'wA_start','wA_data','oT']
@@ -39,14 +39,18 @@ def iO():
 
 def gM():
     cmd = 'gM'
-    command_bytes = command_builder.create(cmd)
-    command_response = parser.decode(cmd, bytes([0x01, 0x02, 0x03, 0x04,0x05,0x06,0x07,0x08]))
+    command_bytes = command_builder.create(cmd,5, [0,1,2,3,4])
+    command_response = parser.decode(cmd, bytes([0x02, 0x01, 0x04, 0x10,0x06,0x9e,0x3f, 0x02, 0x04, 0xa8,0x35,0x3f,0x40 ]))
     return cmd, command_bytes, command_response
 
-def wS():
-    cmd = 'wS'
-    command_bytes = command_builder.create(cmd,0, 2024032818)
-    command_response = parser.decode(cmd, bytes([0x00]))
+def wM():
+    cmd = 'wM'
+    command_bytes = command_builder.create(cmd,3,[
+            {'content_id':1, 'value':1234567890},
+            {'content_id':2, 'value':2345678901},
+            {'content_id':3, 'value':'INS502 8350-5020-01 21790xxxxx v4.0'},
+        ])
+    command_response = parser.decode(cmd, bytes([0x02,0x01,0x00,0x02,0x01]))
     return cmd, command_bytes, command_response
 
 def gE():

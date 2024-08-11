@@ -1,9 +1,10 @@
 from typing import List,Union
 from .message_protocol import (MessageProtocol,OutputConf,CommandConf)
-from .field_parser import(BASIC_DATA_TYPES, EXTEND_DATA_TYPES, PARAMETERS_DATA_TYPES, 
+from .field_parser import(BASIC_DATA_TYPES, EXTEND_DATA_TYPES, PARAMETERS_DATA_TYPES, MANUFACTORY_DATA_TYPES, 
                           encode_field, decode_field, 
                           encode_extend_field, decode_extend_field, 
-                          encode_parameters_field, decode_parameters_field,build_random_value)
+                          encode_parameters_field, decode_parameters_field,build_random_value,
+                          encode_manfuactory_field, decode_manfuactory_field)
 
 class PacketParser:
     __device_type = ''
@@ -67,6 +68,8 @@ class PacketParser:
                     value, data_len = decode_extend_field(field.type, payload, start)
                 elif field.type in PARAMETERS_DATA_TYPES:
                     value, data_len = decode_parameters_field(field.type, self.__config.parameters, payload, start)
+                elif field.type in MANUFACTORY_DATA_TYPES:
+                    value, data_len = decode_manfuactory_field(field.type, self.__config.manufactory, payload, start)
                 else:
                     raise ValueError('Decode command failed, unknown data type {0} in command: {1}'.format(field.type, command.name))
                 result[field.name] = value
@@ -126,6 +129,8 @@ class PacketParser:
                     result.extend(encode_extend_field(field.type, value))
                 elif field.type in PARAMETERS_DATA_TYPES:
                     result.extend(encode_parameters_field(field.type, self.__config.parameters, value))
+                elif field.type in MANUFACTORY_DATA_TYPES:
+                    result.extend(encode_manfuactory_field(field.type, self.__config.manufactory, value))
                 else:
                     raise ValueError('Encode command failed, unknown data type {0} in command: {1}'.format(field.type, command.name))
             return result

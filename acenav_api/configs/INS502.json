@@ -12,6 +12,33 @@
         "thousand": "1/1000",
         "rate": "1e-10"
     },
+    "manufactory":[
+        {
+            "contentId": 0,
+            "name":"mcu_id",
+            "type":"uint64"
+        },
+        {
+            "contentId": 1,
+            "name":"pcba_sn",
+            "type":"uint32"
+        },
+        {
+            "contentId": 2,
+            "name":"device_sn",
+            "type":"uint32"
+        },
+        {
+            "contentId": 3,
+            "name":"product_information",
+            "type":"string"
+        },
+        {
+            "contentId": 4,
+            "name":"secondary_antenna_disable",
+            "type":"uint8"
+        }
+    ],
     "userConfiguration": [
         {
             "paramId": 1,
@@ -334,7 +361,7 @@
             "cA",
             "iO",
             "gM",
-            "wS",
+            "wM",
             "gE",
             "hV",
             "sV",
@@ -1188,34 +1215,42 @@
         "//iO_RESP": [],
         "gM_REQ": [
             {
-                "type": "uint8",
-                "name": "content_type"
+                "name": "paramNums",
+                "type": "uint8"
+            },
+            {
+                "name": "param_ids",
+                "type": "uint8_array"
             }
         ],
         "gM_RESP": [
             {
-                "type": "uint8",
-                "name": "content_type"
-            },
-            {
-                "type": "uint8_array",
-                "name": "content_value"
-            }
-        ],
-        "wS_REQ": [
-            {
-                "type": "uint8",
-                "name": "content_type"
-            },
-            {
-                "type": "uint32",
-                "name": "content_value"
-            }
-        ],
-        "wS_RESP": [
-            {
-                "name": "result",
+                "name": "paramNums",
                 "type": "uint8"
+            },
+            {
+                "name": "contents",
+                "type": "manufactory_array"
+            }
+        ],
+        "wM_REQ": [
+            {
+                "name": "paramNums",
+                "type": "uint8"
+            },
+            {
+                "name": "contents",
+                "type": "manufactory_array"
+            }
+        ],
+        "wM_RESP": [
+            {
+                "name": "paramNums",
+                "type": "uint8"
+            },
+            {
+                "name": "contents",
+                "type": "update_manufactory_result_array"
             }
         ],
         "gE_REQ": [

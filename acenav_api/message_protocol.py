@@ -167,6 +167,7 @@ class OutputConf:
         return self.__fields
 
 class MessageProtocol:
+    __manufactory = []
     __parameters = []
     __commands = []
     __outputs = []
@@ -175,6 +176,18 @@ class MessageProtocol:
     def __init__(self, json_config):
         default_format = json_config['defaults']['format']
         default_endian = json_config['defaults']['payloadEndian']
+        
+        # fill manufacturer
+        for item in json_config['manufactory']:
+            self.__manufactory.append(
+                ParameterConf(
+                    fetch_value(item,'name'),
+                    fetch_value(item,'type'),
+                    fetch_value(item,'contentId'),
+                    fetch_value(item,'endian',default_endian),
+                    fetch_value(item,'precision',4)
+                )
+            )
 
         # fill parameters
         for item in json_config['userConfiguration']:
@@ -282,6 +295,10 @@ class MessageProtocol:
     @property
     def parameters(self)->List[ParameterConf]:
         return self.__parameters
+    
+    @property
+    def manufactory(self)->List[ParameterConf]:
+        return self.__manufactory
 
 def convert_to_packet_dict(packet_conf: Union[str,dict])->dict:
     if isinstance(packet_conf, str):
