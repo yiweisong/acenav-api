@@ -53,7 +53,6 @@ def calc_crc(payload):
                 crc = crc << 1
             i += 1
         crc = crc & 0xffff
-
     crc_msb = ((crc >> 8) & 0xFF)
     crc_lsb = (crc & 0xFF)
     return [crc_msb, crc_lsb]

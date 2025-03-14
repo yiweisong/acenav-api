@@ -3,9 +3,9 @@ from acenav_api import create_parser, create_command_builder
 setattr(sys, '__dev__', True)
 
 # Generate command builder
-command_builder = create_command_builder('INS502')
+command_builder = create_command_builder('INS502', './configs/INS502-next.json')
 # Generate data parser
-parser = create_parser('INS502')
+parser = create_parser('INS502', './configs/INS502-next.json')
 
 #region Command Demo
 

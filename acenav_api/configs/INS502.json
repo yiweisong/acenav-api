@@ -1,5 +1,5 @@
 {
-    "appVersion": "INS502 33.00.01",
+    "appVersion": "INS502 31.01.00",
     "type": "INS502",
     "description": "INS502 Configurartion file",
     "defaults": {
@@ -389,7 +389,7 @@
             {
                 "name": "IN",
                 "display": "INS Solution Packet",
-                "packet": "0x6449"
+                "packet": "0x4e49"
             },
             {
                 "name": "S2",
