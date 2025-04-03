@@ -380,7 +380,7 @@ def __decode_manufactory_array(parameters: List[ParameterConf], payload:bytes):
             'name': param_conf.name,
             'value':value
         })
-        start = start + param_value_start + data_len
+        start = param_value_start + data_len
     
     return result, len(payload)
 

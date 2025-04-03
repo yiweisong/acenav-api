@@ -899,7 +899,7 @@
             },
             {
                 "type": "uint8",
-                "name": "solution_type",
+                "name": "gnss_solution_type",
                 "unit": "",
                 "format": ""
             },
@@ -925,13 +925,13 @@
             },
             {
                 "type": "uint8",
-                "name": "number_of_SVs",
+                "name": "satellite_count_in_view",
                 "unit": "",
                 "format": ""
             },
             {
                 "type": "uint8",
-                "name": "number_of_SVs_in_solution",
+                "name": "satellite_count_in_solution",
                 "unit": "",
                 "format": ""
             },
@@ -949,14 +949,14 @@
                 "scaling": "hundred"
             },
             {
-                "type": "float",
+                "type": "uint16",
                 "name": "vdop",
                 "unit": "",
                 "format": "",
                 "scaling": "hundred"
             },
             {
-                "type": "float",
+                "type": "uint16",
                 "name": "tdop",
                 "unit": "",
                 "format": "",
@@ -964,7 +964,7 @@
             },
             {
                 "type": "uint16",
-                "name": "diffage",
+                "name": "diff_age",
                 "unit": "s",
                 "format": ""
             },
@@ -1033,13 +1033,13 @@
             },
             {
                 "type": "uint8",
-                "name": "primary_snr",
+                "name": "primary_cn0",
                 "unit": "db-Hz",
                 "format": ""
             },
             {
                 "type": "uint8",
-                "name": "secondary_snr",
+                "name": "secondary_cn0",
                 "unit": "db-Hz",
                 "format": ""
             }
@@ -1072,7 +1072,7 @@
             },
             {
                 "type": "uint8",
-                "name": "solution_type",
+                "name": "gnss_solution_type",
                 "unit": "",
                 "format": ""
             },
@@ -1112,7 +1112,7 @@
             },
             {
                 "type": "int16",
-                "name": "up_velocity",
+                "name": "up_vel",
                 "unit": "m/s",
                 "format": "10.4f"
             },
@@ -1139,14 +1139,14 @@
             },
             {
                 "type": "int16",
-                "name": "longitudinal_velocity",
+                "name": "long_vel",
                 "unit": "m/s",
                 "format": "",
                 "scaling": "hundred"
             },
             {
                 "type": "int16",
-                "name": "lateral_velocity",
+                "name": "lat_vel",
                 "unit": "m/s",
                 "format": "",
                 "scaling": "hundred"
@@ -1174,21 +1174,21 @@
             },
             {
                 "type": "uint16",
-                "name": "north_velocity_std",
+                "name": "north_vel_std",
                 "unit": "m/s",
                 "format": "",
                 "scaling": "thousand"
             },
             {
                 "type": "uint16",
-                "name": "east_velocity_std",
+                "name": "east_vel_std",
                 "unit": "m/s",
                 "format": "",
                 "scaling": "thousand"
             },
             {
                 "type": "uint16",
-                "name": "up_velocity_std",
+                "name": "up_vel_std",
                 "unit": "m/s",
                 "format": "",
                 "scaling": "thousand"
@@ -1374,13 +1374,13 @@
             },
             {
                 "type": "uint16",
-                "name": "spp_horizon_velocity_pl",
+                "name": "spp_horizon_vel_pl",
                 "unit": "",
                 "scaling": "hundred"
             },
             {
                 "type": "uint16",
-                "name": "spp_vertical_velocity_pl",
+                "name": "spp_vertical_vel_pl",
                 "unit": "",
                 "scaling": "hundred"
             },
@@ -1398,13 +1398,13 @@
             },
             {
                 "type": "uint16",
-                "name": "rtk_horizon_velocity_pl",
+                "name": "rtk_horizon_vel_pl",
                 "unit": "",
                 "scaling": "hundred"
             },
             {
                 "type": "uint16",
-                "name": "rtk_vertical_velocity_pl",
+                "name": "rtk_vertical_vel_pl",
                 "unit": "",
                 "scaling": "hundred"
             },
@@ -1428,13 +1428,13 @@
             },
             {
                 "type": "uint16",
-                "name": "spp_horizon_velocity_al",
+                "name": "spp_horizon_vel_al",
                 "unit": "",
                 "scaling": "hundred"
             },
             {
                 "type": "uint16",
-                "name": "spp_vertical_velocity_al",
+                "name": "spp_vertical_vel_al",
                 "unit": "",
                 "scaling": "hundred"
             },
@@ -1452,13 +1452,13 @@
             },
             {
                 "type": "uint16",
-                "name": "rtk_horizon_velocity_al",
+                "name": "rtk_horizon_vel_al",
                 "unit": "",
                 "scaling": "hundred"
             },
             {
                 "type": "uint16",
-                "name": "rtk_vertical_velocity_al",
+                "name": "rtk_vertical_vel_al",
                 "unit": "",
                 "scaling": "hundred"
             },
@@ -1620,7 +1620,7 @@
             },
             {
                 "type": "uint8",
-                "name": "solution_type"
+                "name": "gnss_solution_type"
             },
             {
                 "type": "uint16",
@@ -1660,11 +1660,11 @@
             },
             {
                 "type": "uint8",
-                "name": "numberOfSVsInView"
+                "name": "secondary_satellite_count_in_view"
             },
             {
                 "type": "uint8",
-                "name": "numberOfSVInDualAntenna"
+                "name": "secondary_satellite_count_in_solution"
             }
         ],
         "SV": [
