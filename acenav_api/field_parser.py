@@ -16,6 +16,8 @@ EXTEND_DATA_TYPES = [
     'output_update_result_array'
 ]
 
+SPECIAL_DATA_TYPES = ['bits']
+
 PARAMETERS_DATA_TYPES = ['parameter_array','update_result_array']
 
 PARAMETER_DATA_TYPES = ['orientation','IPV4','IPV6','mac_address']
@@ -210,6 +212,29 @@ def encode_manfuactory_field(data_type:str, parameters: List[ParameterConf], val
         raise ValueError('Encode failed, unknown manufactory data type: {0}'.format(data_type))
     
     return payload
+
+def decode_bits_field(payload:bytes, start_bit:int, length:int, endian:str = 'lsb')->int:
+    """
+    Decode a value from specific bits in the payload.
+    """
+    # Convert the entire payload to a large integer
+    # 'lsb' (Little Endian) usually means the 0th byte is the least significant.
+    byte_order = 'little' if endian == 'lsb' else 'big'
+    payload_int = int.from_bytes(payload, byte_order)
+    
+    # Extract the bits
+    # Shift right to move the target bits to LSB, then mask
+    value = (payload_int >> start_bit) & ((1 << length) - 1)
+    return value
+
+def encode_bits_field(current_payload_int: int, value: int, start_bit: int, length: int) -> int:
+    """
+    Encode a value into specific bits in the payload integer.
+    """
+    mask = (1 << length) - 1
+    value = int(value) & mask # Ensure value fits in length
+    current_payload_int |= (value << start_bit)
+    return current_payload_int
 
 def __decode_output_array(payload:bytes):
     '''List of packet_type(uint16), odr(uint8)
@@ -477,6 +502,13 @@ def __encode_orientation(value:str):
         return encode_field('uint16', 'lsb', ORIENTATION_MAPPING[value])
 
     return bytes([0x00, 0x00])
+
+def build_random_bits(length:int)->Union[int]:
+    random_value = 0
+    for i in range(length):
+        bit_value = random.randint(0,1)
+        random_value = random_value | (bit_value << i)
+    return random_value
 
 def build_random_value(data_type:str)->Union[int,float]:
     if data_type == 'uint64':

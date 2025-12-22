@@ -2,21 +2,39 @@ import pkgutil
 import struct
 import os
 import sys
-from typing import List,Union
+from typing import List,Union,Tuple
 from .package import PACKAGE_NAME
 
-def convert_packet_to_bytes_array(name:str, packet:Union[None, str, List[int]])->List[int]:
+def convert_output_packet(name:str, packet:Union[None, str, List[int]])->List[int]:
     if packet == None:
         return [ord(c) for c in name]
 
     if isinstance(packet, str):
         try:
             packet_number = int(packet, 16)
-            return list(struct.pack('<H', packet_number))
+            if packet_number <= 0xFFFF:
+                return list(struct.pack('<H', packet_number))
+            elif packet_number <= 0xFFFFFFFF:
+                return list(struct.pack('<I', packet_number))
+            else:
+                return list(struct.pack('<Q', packet_number))
         except:
             raise Exception('Invalid value in packet raw data: ' + packet)
     
     return packet
+
+def convert_input_packet(name:str, packet:Union[None, str, List[int], dict])->Tuple[List[int],List[int]]:
+    if packet == None or isinstance(packet, str) or isinstance(packet, list):
+        packet_list = convert_output_packet(name, packet)
+        return (packet_list, packet_list)
+    
+    if isinstance(packet, dict):
+        if 'request' not in packet or 'response' not in packet:
+            raise Exception('Invalid value in packet raw data: ' + str(packet))
+        request_packet_list = convert_output_packet(name, packet['request'])
+        response_packet_list = convert_output_packet(name, packet['response']) if packet['response'] != None else None
+
+        return (request_packet_list, response_packet_list)
 
 def fetch_value(field:dict, key:str, default=None)->Union[None, str, int, float]:
     if key in field:

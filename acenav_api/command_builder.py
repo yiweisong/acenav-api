@@ -48,7 +48,7 @@ class CommandBuilder:
         '''
         command_bytes = bytearray()
         # append packet type
-        packet = bytearray(command_conf.packet)
+        packet = bytearray(command_conf.request_packet)
         payload_length_fmt = build_payload_length_fmt(command_conf.format) 
         payload_len = len(payload)
         # append packet length
