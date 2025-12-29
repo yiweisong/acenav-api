@@ -171,9 +171,10 @@ class PacketParser:
 
     def __build_command_payload_encoder(self, command: CommandConf, scalings: dict):
         if command.request_fields == None or len(command.request_fields) == 0:
-            return lambda args: bytes([])
+            return lambda *args: bytes([])
         
-        def encoder(args)->bytes:
+        def encoder(*args)->bytes:
+            print('encoder args', args)
             args_len = len(args)
             result = bytearray()
             # same as decoder, analyze the command fields
@@ -225,7 +226,7 @@ class PacketParser:
             self.__encoder[packet_type] = encoder
         else:
             encoder = self.__encoder[packet_type]
-        
+
         return encoder(*args)
     
     def build_random_data(self, packet_type:str)->List[Union[int,float]]:

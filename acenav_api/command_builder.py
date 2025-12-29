@@ -74,8 +74,8 @@ class CommandBuilder:
     def __init_command_builder(self, command:str):
         exist_command = next((cmd for cmd in self.__config.commands if cmd.name==command), None)
         
-        def builder(args)->bytes:
-            payload_bytes = self.__data_parser.encode(command, args)            
+        def builder(*args)->bytes:
+            payload_bytes = self.__data_parser.encode(command, *args)            
             return self.__to_command(exist_command, payload_bytes)
             
         if exist_command != None:
@@ -92,4 +92,4 @@ class CommandBuilder:
         else:
             builder = self.__builder[command]
 
-        return builder(args)
+        return builder(*args)
