@@ -217,7 +217,7 @@ class PacketParser:
 
         return decoder(payload)
 
-    def encode(self, packet_type:str, packet_value: dict)->bytes:
+    def encode(self, packet_type:str, *args)->bytes:
         if packet_type not in self.__encoder:
             encoder = self.__build_encoder(packet_type)
             if encoder == None:
@@ -226,7 +226,7 @@ class PacketParser:
         else:
             encoder = self.__encoder[packet_type]
         
-        return encoder(packet_value)
+        return encoder(*args)
     
     def build_random_data(self, packet_type:str)->List[Union[int,float]]:
         # read payload define from the config, build a random data for the packet type
