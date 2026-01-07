@@ -174,7 +174,6 @@ class PacketParser:
             return lambda *args: bytes([])
         
         def encoder(*args)->bytes:
-            print('encoder args', args)
             args_len = len(args)
             result = bytearray()
             # same as decoder, analyze the command fields
