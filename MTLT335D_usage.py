@@ -1,1 +1,142 @@
-import sysimport structfrom acenav_api import create_parser,PacketParser,create_j1939_packet_parser,J1939PacketParsersetattr(sys, '__dev__', True)#region Generate data parserparser = create_parser('MTLT335D', './configs/MTLT335D.json')j1939_packet_parser = create_j1939_packet_parser('MTLT335D', './configs/MTLT335D.json')#endregion#region Generate command builderclass CommandBuilder:    def __init__(self, parser: PacketParser):        self.__parser = parser        self.__is_exteneded_id = True            def create(self, command_name: str, *args):        cmd_config = next((cmd for cmd in self.__parser.config.commands if cmd.name == command_name), None)        if cmd_config is None:            raise ValueError(f'Command {command_name} not found in parser configuration')                request_j1939_packet = j1939_packet_parser.get(bytes(cmd_config.request_packet).decode())                if request_j1939_packet is None:            raise ValueError(f'J1939 Packet {cmd_config.request_packet} not found in J1939 packet configuration')        request_frame_id = request_j1939_packet.build_arbitration_id(destination_address=0x80, source_address=0x00)        if len(args) >= 1 and isinstance(args[0], dict):            # extract the value from first agument, format as a list. Ignore other arguments            new_args = [args[0][key] for key in args[0].keys()]            request_frame_data = self.__parser.encode(cmd_config.name, *new_args)        else:            request_frame_data = self.__parser.encode(cmd_config.name, *args)            return '0x{0:X}'.format(request_frame_id), request_frame_data    command_builder = CommandBuilder(parser)#endregion#region Command Democommand_definitions = [    ['getSoftwareIdentification', [0xFEDA, 0x00], '31.00.32'.encode('utf-8')],    ['getPeriodicDataRate', [0xFF55, 0x00], bytes([0x80, 0x01])],    ['getPeriodicDataControlSettings', [0xFF56, 0x00], bytes([0x80, 0x01,0x01, 0x01, 0x01])],    ['getDigitalFilter', [0xFF57, 0x00], bytes([0x80, 0x19, 0x05, 0x19, 0x19])],    ['getAxisOrientation', [0xFF58, 0x00], bytes([0x01, 0x02, 0x03])],    ['getEcuId', [0xFDC5, 0x00], bytes([0x12,0x34,0x56,0x78, 0xAD, 0xBE, 0xEF, 0x00])],    ['getMasterBitStatus', [0xFF54, 0x00], bytes([0x01,0x02,0x03,0x04])],    ['getSoftwareBitStatus', [0xFF53, 0x00], bytes([0x05,0x06,0x07,0x08])],    ['getHardwareBitStatus', [0xFF52, 0x00], bytes([0x09,0x0A,0x0B,0x0C])],    ['getUnitBehavior', [0xFF59, 0x00], bytes([0x80,0x01,0x01])],    ['getInSystemAlignment', [0xFF62, 0x00], bytes([0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])],    ['getAlgorithmControl', [0xFF5B, 0x00], bytes([0x80, 0x01, 0x00, 0x00, 0x05, 0x00, 0x01, 0x00])],    ['getAidingSignalConfig',[0xFF5F, 0x00], bytes([0x80, 0x01, 0x01, 0x01, 0x05, 0x01, 0x01, 0x00])],    ['getAidingLeverArm', [0xFF60, 0x00], bytes([0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])],    ['getDM1Config', [0xFF5A,0x00], bytes([0x80,0x01,0xFF,0xB3,0xF4,0x07,0x0C,0x0E])],    ['getUnitTemperature', [0xFF5D,0x00], bytes([0x80,0x00])],    ['saveConfiguration', [0x01, 0x80, 0x00], bytes([0x01, 0x80, 0x01])],    ['resetAlgorithm', [0x02, 0x80, 0x00], bytes([0x02, 0x80, 0x01])],    ['setPacketRateDivider', {'destinationAddress':0x80, 'packetRate':0x01}, bytes([])],    ['setDataPacketType', [0x80, 0xFF, 0x00, 0x01, 0x01], bytes([])],    ['setDigitalFilter', [0x80, 0x19, 0x05, 0x19, 0x19], bytes([])],    ['setOrientation', [0x80, 0x01], bytes([])],    ['setUnitBehavior', [0x80, 0x01, 0x02, 0x01, 0x02, 0x80], bytes([])],    ['setAlgorithmControl', [0x80, 0x01,0x00,0x00,10000,0.001], bytes([])],    ['setInSystemAlignment', [0x80, 0x00, 0, 0, 0], bytes([])],    ['setAidingSignalConfig', [0x80, 0x01, 0x01, 0x01, 0x05, 0x01, 0x01, 0x00], bytes([])],    ['setAidingLeverArm',[0x80, 0,0,0], bytes([])],    ['setDM1Config', [0x80,0x01,0xFF,0xB3,0xF4,0x07,0x0C,0x0E], bytes([])],    ['setPSBank0', [0x80, 80, 81, 82, 83, 84, 107, 109], bytes([])],    ['setPSBank1', [0x80, 85, 86, 87, 88, 89, 91, 0x00], bytes([])],    ['setPSBank2', [0x80, 95, 96, 90, 0x00], bytes([])],    ['DM11_DTC_Reset', [0x00, 0x00, 0xFF,0xFF,0xFF, 0xD3,0xFE,0x00], bytes([0x00, 0x00, 0xFF,0xFF,0xFF, 0xD3,0xFE,0x00])],    ['DM13', [0x3F, 0xFF ,0xFF, 0xFF, 0xFFFF, 0xFFFF], bytes()],]def command_demo():    print('Command Demo:')    print('--------------------------\r\n')    for command in command_definitions:        cmd = command[0]        if isinstance(command[1], list):            message_id, data = command_builder.create(cmd, *command[1])        else:            message_id, data = command_builder.create(cmd, command[1])        command_response = parser.decode(cmd, command[2])        print_command((cmd, (message_id, data), command_response))def print_command(args):    if args == None or len(args) != 3:        return    cmd = args[0]    request = args[1]    response = args[2]    print('Command:',cmd)    print('\r')    print('Request:', request) #['{:X}'.format(x) for x in request])    #print('\r')    print('Response:', response)    print('\r\n--------------------------\r\n')#endregion Command Demo#region Data Parser Demodef data_parser_demo():    print('Data Parser Demo:')    print('--------------------------\r\n')    output_packet_types = ['SSI2','SSI','ARI','ARI_HR','ACCS','ACCS_HR','UnitTemperature']    for packet_type in output_packet_types:        print_output(build_output_demo(packet_type))    def build_output_demo(packet_type:str):    random_data = parser.build_random_data(packet_type)    if random_data is None:        return None    encode_result = parser.encode(packet_type, random_data)        decode_result = parser.decode(packet_type, encode_result)    return packet_type, encode_result, decode_resultdef print_output(args):    if args == None or len(args) != 3:        return    packet_type = args[0]    encode_result = args[1]    decode_result = args[2]    print('Packet Type:',packet_type)    print('\r')    print('Encoded:', encode_result)    print('\r')    print('Decoded:', decode_result) #['{:X}'.format(x) for x in encode_result])    print('\r\n--------------------------\r\n')#endregion Data Parser Demoif __name__ == '__main__':    command_demo()    data_parser_demo()    
+import sys
+import struct
+from acenav_api import create_parser,PacketParser,create_j1939_packet_parser,J1939PacketParser
+setattr(sys, '__dev__', True)
+
+#region Generate data parser
+parser = create_parser('MTLT335D', './configs/MTLT335D-can.json')
+j1939_packet_parser = create_j1939_packet_parser('MTLT335D', './configs/MTLT335D-can.json')
+#endregion
+
+#region Generate command builder
+class CommandBuilder:
+    def __init__(self, parser: PacketParser):
+        self.__parser = parser
+        self.__is_exteneded_id = True
+        
+    def create(self, command_name: str, *args):
+        cmd_config = next((cmd for cmd in self.__parser.config.commands if cmd.name == command_name), None)
+        if cmd_config is None:
+            raise ValueError(f'Command {command_name} not found in parser configuration')
+        
+        request_j1939_packet = j1939_packet_parser.get(bytes(cmd_config.request_packet).decode())
+        
+        if request_j1939_packet is None:
+            raise ValueError(f'J1939 Packet {cmd_config.request_packet} not found in J1939 packet configuration')
+
+        request_frame_id = request_j1939_packet.build_arbitration_id(destination_address=0x80, source_address=0x00)
+        if len(args) >= 1 and isinstance(args[0], dict):
+            # extract the value from first agument, format as a list. Ignore other arguments
+            new_args = [args[0][key] for key in args[0].keys()]
+            request_frame_data = self.__parser.encode(cmd_config.name, *new_args)
+        else:
+            request_frame_data = self.__parser.encode(cmd_config.name, *args)
+    
+        return '0x{0:X}'.format(request_frame_id), request_frame_data
+    
+command_builder = CommandBuilder(parser)
+#endregion
+
+#region Command Demo
+
+command_definitions = [
+    ['getSoftwareIdentification', [0xFEDA, 0x00], '31.00.32'.encode('utf-8')],
+    ['getPeriodicDataRate', [0xFF55, 0x00], bytes([0x80, 0x01])],
+    ['getPeriodicDataControlSettings', [0xFF56, 0x00], bytes([0x80, 0x01,0x01, 0x01, 0x01])],
+    ['getDigitalFilter', [0xFF57, 0x00], bytes([0x80, 0x19, 0x05, 0x19, 0x19])],
+    ['getAxisOrientation', [0xFF58, 0x00], bytes([0x01, 0x02, 0x03])],
+    ['getEcuId', [0xFDC5, 0x00], bytes([0x12,0x34,0x56,0x78, 0xAD, 0xBE, 0xEF, 0x00])],
+    ['getMasterBitStatus', [0xFF54, 0x00], bytes([0x01,0x02,0x03,0x04])],
+    ['getSoftwareBitStatus', [0xFF53, 0x00], bytes([0x05,0x06,0x07,0x08])],
+    ['getHardwareBitStatus', [0xFF52, 0x00], bytes([0x09,0x0A,0x0B,0x0C])],
+    ['getUnitBehavior', [0xFF59, 0x00], bytes([0x80,0x01,0x01])],
+    ['getInSystemAlignment', [0xFF62, 0x00], bytes([0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])],
+    ['getAlgorithmControl', [0xFF5B, 0x00], bytes([0x80, 0x01, 0x00, 0x00, 0x05, 0x00, 0x01, 0x00])],
+    ['getAidingSignalConfig',[0xFF5F, 0x00], bytes([0x80, 0x01, 0x01, 0x01, 0x05, 0x01, 0x01, 0x00])],
+    ['getAidingLeverArm', [0xFF60, 0x00], bytes([0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])],
+    ['getDM1Config', [0xFF5A,0x00], bytes([0x80,0x01,0xFF,0xB3,0xF4,0x07,0x0C,0x0E])],
+    ['getUnitTemperature', [0xFF5D,0x00], bytes([0x80,0x00])],
+    ['saveConfiguration', [0x01, 0x80, 0x00], bytes([0x01, 0x80, 0x01])],
+    ['resetAlgorithm', [0x02, 0x80, 0x00], bytes([0x02, 0x80, 0x01])],
+    ['setPacketRateDivider', {'destinationAddress':0x80, 'packetRate':0x01}, bytes([])],
+    ['setDataPacketType', [0x80, 0xFF, 0x00, 0x01, 0x01], bytes([])],
+    ['setDigitalFilter', [0x80, 0x19, 0x05, 0x19, 0x19], bytes([])],
+    ['setOrientation', [0x80, 0x01], bytes([])],
+    ['setUnitBehavior', [0x80, 0x01, 0x02, 0x01, 0x02, 0x80], bytes([])],
+    ['setAlgorithmControl', [0x80, 0x01,0x00,0x00,10000,0.001], bytes([])],
+    ['setInSystemAlignment', [0x80, 0x00, 0, 0, 0], bytes([])],
+    ['setAidingSignalConfig', [0x80, 0x01, 0x01, 0x01, 0x05, 0x01, 0x01, 0x00], bytes([])],
+    ['setAidingLeverArm',[0x80, 0,0,0], bytes([])],
+    ['setDM1Config', [0x80,0x01,0xFF,0xB3,0xF4,0x07,0x0C,0x0E], bytes([])],
+    ['setPSBank0', [0x80, 80, 81, 82, 83, 84, 107, 109], bytes([])],
+    ['setPSBank1', [0x80, 85, 86, 87, 88, 89, 91, 0x00], bytes([])],
+    ['setPSBank2', [0x80, 95, 96, 90, 0x00], bytes([])],
+    ['DM11_DTC_Reset', [0x00, 0x00, 0xFF,0xFF,0xFF, 0xD3,0xFE,0x00], bytes([0x00, 0x00, 0xFF,0xFF,0xFF, 0xD3,0xFE,0x00])],
+    ['DM13', [0x3F, 0xFF ,0xFF, 0xFF, 0xFFFF, 0xFFFF], bytes()],
+]
+
+def command_demo():
+    print('Command Demo:')
+    print('--------------------------\r\n')
+    for command in command_definitions:
+        cmd = command[0]
+        if isinstance(command[1], list):
+            message_id, data = command_builder.create(cmd, *command[1])
+        else:
+            message_id, data = command_builder.create(cmd, command[1])
+        command_response = parser.decode(cmd, command[2])
+        print_command((cmd, (message_id, data), command_response))
+
+def print_command(args):
+    if args == None or len(args) != 3:
+        return
+    cmd = args[0]
+    request = args[1]
+    response = args[2]
+    print('Command:',cmd)
+    print('\r')
+    print('Request:', request) #['{:X}'.format(x) for x in request])
+    #print('\r')
+    print('Response:', response)
+    print('\r\n--------------------------\r\n')
+
+#endregion Command Demo
+
+#region Data Parser Demo
+
+def data_parser_demo():
+    print('Data Parser Demo:')
+    print('--------------------------\r\n')
+    output_packet_types = ['SSI2','SSI','ARI','ARI_HR','ACCS','ACCS_HR','UnitTemperature']
+    for packet_type in output_packet_types:
+        print_output(build_output_demo(packet_type))
+    
+def build_output_demo(packet_type:str):
+    random_data = parser.build_random_data(packet_type)
+
+    if random_data is None:
+        return None
+
+    encode_result = parser.encode(packet_type, random_data)    
+    decode_result = parser.decode(packet_type, encode_result)
+    return packet_type, encode_result, decode_result
+
+def print_output(args):
+    if args == None or len(args) != 3:
+        return
+    packet_type = args[0]
+    encode_result = args[1]
+    decode_result = args[2]
+    print('Packet Type:',packet_type)
+    print('\r')
+    print('Encoded:', encode_result)
+    print('\r')
+    print('Decoded:', decode_result) #['{:X}'.format(x) for x in encode_result])
+    print('\r\n--------------------------\r\n')
+
+#endregion Data Parser Demo
+
+if __name__ == '__main__':
+    command_demo()
+    data_parser_demo()
+    

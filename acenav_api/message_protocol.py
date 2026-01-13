@@ -1,6 +1,6 @@
 import os
 import json
-from typing import List,Union,Tuple,Dict
+from typing import List,Union,Tuple,Dict,Protocol
 
 from .utils import (convert_input_packet,
                     convert_output_packet,
@@ -45,7 +45,21 @@ class ParameterConf:
     def precision(self)->int:
         return self.__precision
 
-class CommandFieldConf:
+class FieldConf(Protocol):
+    @property
+    def type(self)->str:
+        ...
+    
+    @property
+    def name(self)->str:
+        ...
+    
+    @property
+    def endian(self)->str:
+        ...
+
+
+class CommandFieldConf(FieldConf):
     __type = ''
     __name = ''
     __endian = ''
@@ -111,7 +125,7 @@ class CommandConf:
     def format(self)->str:
         return self.__format
 
-class OutputFieldConf:
+class OutputFieldConf(FieldConf):
     __type = ''
     __name = ''
     __endian = ''
